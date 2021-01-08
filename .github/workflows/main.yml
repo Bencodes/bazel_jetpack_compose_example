@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  buildifier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the sources"
+        uses: actions/checkout@v2.3.1
+      - name: "Install the JDK"
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: "11.0.5"
+      - name: Install buildifier
+        run: |
+          curl --location --fail "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" --output /tmp/buildifier
+          chmod +x /tmp/buildifier && echo "/tmp/" >> $GITHUB_PATH
+      - name: "Linting"
+        run: buildifier -mode check -lint warn -r .
