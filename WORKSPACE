@@ -2,7 +2,9 @@ workspace(name = "bazel_jetpack_compose_example")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-_KOTLIN_COMPILER_VERSION = "1.4.21"
+_KOTLIN_COMPILER_VERSION = "1.4.30"
+
+_JETPACK_COMPOSE_VERSION = "1.0.0-beta01"
 
 ## JVM External
 
@@ -27,11 +29,18 @@ maven_install(
         "androidx.core:core-ktx:1.3.2",
         "androidx.appcompat:appcompat:1.2.0",
         "com.google.android.material:material:1.2.1",
-        "androidx.compose.material:material:1.0.0-alpha09",
-        "androidx.compose.ui:ui:1.0.0-alpha09",
-        "androidx.compose.ui:ui-tooling:1.0.0-alpha09",
-        "androidx.compose.compiler:compiler:1.0.0-alpha09",
+        "androidx.activity:activity-compose:1.3.0-alpha02",
+        "androidx.compose.material:material:{}".format(_JETPACK_COMPOSE_VERSION),
+        "androidx.compose.ui:ui:{}".format(_JETPACK_COMPOSE_VERSION),
+        "androidx.compose.ui:ui-tooling:{}".format(_JETPACK_COMPOSE_VERSION),
+        "androidx.compose.compiler:compiler:{}".format(_JETPACK_COMPOSE_VERSION),
+        "androidx.compose.runtime:runtime:{}".format(_JETPACK_COMPOSE_VERSION),
     ],
+    override_targets = {
+        "org.jetbrains.kotlin:kotlin-stdlib": "@com_github_jetbrains_kotlin//:kotlin-stdlib",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk7": "@com_github_jetbrains_kotlin//:kotlin-stdlib-jdk7",
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8": "@com_github_jetbrains_kotlin//:kotlin-stdlib-jdk8",
+    },
     repositories = [
         "https://jcenter.bintray.com/",
         "https://maven.google.com",
@@ -150,7 +159,7 @@ _RULES_KOTLIN_COMPILER_RELEASE = {
     "urls": [
         "https://github.com/JetBrains/kotlin/releases/download/v{v}/kotlin-compiler-{v}.zip".format(v = _KOTLIN_COMPILER_VERSION),
     ],
-    "sha256": "46720991a716e90bfc0cf3f2c81b2bd735c14f4ea6a5064c488e04fd76e6b6c7",
+    "sha256": "7b0aae9dca5ea899ef05dedc0a6fdd6e359451e56ff0dd3354443b3208b31800",
 }
 
 kotlin_repositories(
