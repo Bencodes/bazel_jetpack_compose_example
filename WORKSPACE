@@ -133,17 +133,15 @@ android_sdk_repository(
 
 ## Kotlin
 
-_RULES_KOTLIN_VERSION = "6d0a72d634c9ba2ae26e2af4927500a6739d3acd"
+_RULES_KOTLIN_VERSION = "v1.5.0-alpha-3"
 
-_RULES_KOTLIN_SHA = "600c8d07451bdc85e599180f172e5625cd6afe1eea80dc5aaaa109f5517c07bc"
+_RULES_KOTLIN_SHA = "eeae65f973b70896e474c57aa7681e444d7a5446d9ec0a59bb88c59fc263ff62"
 
 http_archive(
     name = "io_bazel_rules_kotlin",
     sha256 = _RULES_KOTLIN_SHA,
-    strip_prefix = "rules_kotlin-{}".format(_RULES_KOTLIN_VERSION),
-    urls = [
-        "https://github.com/lyft/rules_kotlin/archive/{}.tar.gz".format(_RULES_KOTLIN_VERSION),
-    ],
+    type = "tar.gz",
+    urls = ["https://github.com/bazelbuild/rules_kotlin/releases/download/%s/rules_kotlin_release.tgz" % _RULES_KOTLIN_VERSION],
 )
 
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories")
