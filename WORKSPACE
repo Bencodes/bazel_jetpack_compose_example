@@ -2,9 +2,9 @@ workspace(name = "bazel_jetpack_compose_example")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-_KOTLIN_COMPILER_VERSION = "1.4.30"
+_KOTLIN_COMPILER_VERSION = "1.4.32"
 
-_JETPACK_COMPOSE_VERSION = "1.0.0-beta01"
+_JETPACK_COMPOSE_VERSION = "1.0.0-beta04"
 
 ## JVM External
 
@@ -89,7 +89,7 @@ _RULES_KOTLIN_COMPILER_RELEASE = {
     "urls": [
         "https://github.com/JetBrains/kotlin/releases/download/v{v}/kotlin-compiler-{v}.zip".format(v = _KOTLIN_COMPILER_VERSION),
     ],
-    "sha256": "7b0aae9dca5ea899ef05dedc0a6fdd6e359451e56ff0dd3354443b3208b31800",
+    "sha256": "dfef23bb86bd5f36166d4ec1267c8de53b3827c446d54e82322c6b6daad3594c",
 }
 
 kotlin_repositories(
