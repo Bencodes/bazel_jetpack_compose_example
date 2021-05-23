@@ -11,13 +11,37 @@ jobs:
     steps:
       - name: "Checkout the sources"
         uses: actions/checkout@v2.3.1
-      - name: "Install the JDK"
-        uses: actions/setup-java@v1.4.3
+      - name: Setup JDK
+        uses: actions/setup-java@v1
         with:
-          java-version: "11.0.5"
+          distribution: "adopt"
+          java-version: 11
       - name: Install buildifier
         run: |
           curl --location --fail "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" --output /tmp/buildifier
           chmod +x /tmp/buildifier && echo "/tmp/" >> $GITHUB_PATH
       - name: "Linting"
         run: buildifier -mode check -lint warn -r .
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout the sources"
+        uses: actions/checkout@v2.3.1
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          distribution: "adopt"
+          java-version: 11
+      - name: Mount Bazel caches
+        uses: actions/cache@v2.1.4
+        env:
+          cache-name: bazel_jetpack_compose_example
+        with:
+          path: |
+            ~/.cache/bazel
+            ~/.m2/repository
+          key: ${{ runner.os }}-${{ env.cache-name }}
+      - name: Setup Bazelisk
+        uses: holvonix-open/setup-bazelisk@v0.6.1
+      - name: "Building"
+        run: bazel build //compose-app:compose_example_app
