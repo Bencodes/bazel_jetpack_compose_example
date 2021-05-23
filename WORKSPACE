@@ -4,13 +4,13 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 _KOTLIN_COMPILER_VERSION = "1.4.32"
 
-_JETPACK_COMPOSE_VERSION = "1.0.0-beta04"
+_JETPACK_COMPOSE_VERSION = "1.0.0-beta07"
 
 ## JVM External
 
-_RULES_JVM_EXTERNAL_VERSION = "4.0"
+_RULES_JVM_EXTERNAL_VERSION = "4.1"
 
-_RULES_JVM_EXTERNAL_SHA = "31701ad93dbfe544d597dbe62c9a1fdd76d81d8a9150c2bf1ecf928ecdf97169"
+_RULES_JVM_EXTERNAL_SHA = "f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140"
 
 http_archive(
     name = "rules_jvm_external",
