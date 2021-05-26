@@ -42,7 +42,6 @@ maven_install(
         "org.jetbrains.kotlin:kotlin-stdlib-jdk8": "@com_github_jetbrains_kotlin//:kotlin-stdlib-jdk8",
     },
     repositories = [
-        "https://jcenter.bintray.com/",
         "https://maven.google.com",
         "https://repo1.maven.org/maven2",
     ],
