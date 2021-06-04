@@ -12,8 +12,6 @@ default_java_toolchain(
 
 kt_kotlinc_options(
     name = "kt_kotlinc_options",
-    x_allow_jvm_ir_dependencies = True,
-    x_use_ir = True,
 )
 
 kt_javac_options(
