@@ -22,12 +22,12 @@ kt_javac_options(
 
 define_kt_toolchain(
     name = "kotlin_toolchain",
-    api_version = "1.4",
+    api_version = "1.5",
     experimental_use_abi_jars = False,
     javac_options = "//:kt_javac_options",
     jvm_target = "1.8",
     kotlinc_options = "//:kt_kotlinc_options",
-    language_version = "1.4",
+    language_version = "1.5",
 )
 
 # Define the compose compiler plugin
