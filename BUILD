@@ -23,7 +23,7 @@ kt_javac_options(
 define_kt_toolchain(
     name = "kotlin_toolchain",
     api_version = "1.4",
-    experimental_use_abi_jars = False,
+    experimental_use_abi_jars = True,
     javac_options = "//:kt_javac_options",
     jvm_target = "1.8",
     kotlinc_options = "//:kt_kotlinc_options",
