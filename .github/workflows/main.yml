@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           distribution: "adopt"
-          java-version: 11
+          java-version: 8
       - name: Install buildifier
         run: |
           curl --location --fail "https://github.com/bazelbuild/buildtools/releases/download/3.5.0/buildifier" --output /tmp/buildifier
@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           distribution: "adopt"
-          java-version: 11
+          java-version: 8
       - name: Mount Bazel caches
         uses: actions/cache@v2.1.4
         env:
