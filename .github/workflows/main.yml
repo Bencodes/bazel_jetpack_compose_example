@@ -43,5 +43,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}
       - name: Setup Bazelisk
         uses: holvonix-open/setup-bazelisk@v0.6.1
+      - name: "Info"
+        run: bazel info
       - name: "Building"
         run: bazel build //compose-app:compose_example_app
