@@ -24,9 +24,8 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
         "org.jetbrains.kotlin:kotlin-stdlib:{}".format(_KOTLIN_COMPILER_VERSION),
-        "androidx.core:core-ktx:1.3.2",
-        "androidx.appcompat:appcompat:1.2.0",
-        "com.google.android.material:material:1.2.1",
+        "androidx.core:core-ktx:1.6.0",
+        "androidx.appcompat:appcompat:1.3.0",
         "androidx.activity:activity-compose:1.3.0-alpha02",
         "androidx.compose.material:material:1.0.0-beta08",
         "androidx.compose.ui:ui:1.0.0-beta08",

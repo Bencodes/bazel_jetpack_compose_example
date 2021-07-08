@@ -6,7 +6,7 @@
 
     <application
         android:label="Bazel Jetpack Compose Example"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".MainActivity"
             android:label="Bazel Jetpack Compose Example">
