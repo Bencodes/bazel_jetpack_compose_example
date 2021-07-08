@@ -2,9 +2,7 @@ workspace(name = "bazel_jetpack_compose_example")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-_KOTLIN_COMPILER_VERSION = "1.4.32"
-
-_JETPACK_COMPOSE_VERSION = "1.0.0-beta07"
+_KOTLIN_COMPILER_VERSION = "1.5.10"
 
 ## JVM External
 
@@ -30,11 +28,11 @@ maven_install(
         "androidx.appcompat:appcompat:1.2.0",
         "com.google.android.material:material:1.2.1",
         "androidx.activity:activity-compose:1.3.0-alpha02",
-        "androidx.compose.material:material:{}".format(_JETPACK_COMPOSE_VERSION),
-        "androidx.compose.ui:ui:{}".format(_JETPACK_COMPOSE_VERSION),
-        "androidx.compose.ui:ui-tooling:{}".format(_JETPACK_COMPOSE_VERSION),
-        "androidx.compose.compiler:compiler:{}".format(_JETPACK_COMPOSE_VERSION),
-        "androidx.compose.runtime:runtime:{}".format(_JETPACK_COMPOSE_VERSION),
+        "androidx.compose.material:material:1.0.0-beta08",
+        "androidx.compose.ui:ui:1.0.0-beta08",
+        "androidx.compose.ui:ui-tooling:1.0.0-beta08",
+        "androidx.compose.compiler:compiler:1.0.0-beta08",
+        "androidx.compose.runtime:runtime:1.0.0-beta08",
     ],
     override_targets = {
         "org.jetbrains.kotlin:kotlin-stdlib": "@com_github_jetbrains_kotlin//:kotlin-stdlib",
@@ -72,28 +70,31 @@ android_sdk_repository(
 
 ## Kotlin
 
-_RULES_KOTLIN_VERSION = "v1.5.0-alpha-3"
-
-_RULES_KOTLIN_SHA = "eeae65f973b70896e474c57aa7681e444d7a5446d9ec0a59bb88c59fc263ff62"
+# Enable Kotlin
+_RULES_KOTLIN_VERSION = "c26007a1776a79d94bea7c257ef07a23bbc998d5"
 
 http_archive(
     name = "io_bazel_rules_kotlin",
-    sha256 = _RULES_KOTLIN_SHA,
-    type = "tar.gz",
-    urls = ["https://github.com/bazelbuild/rules_kotlin/releases/download/%s/rules_kotlin_release.tgz" % _RULES_KOTLIN_VERSION],
+    sha256 = "be7b1fac4f93fbb81eb79f2f44caa97e1dfa69d2734e4e184443acd9f5182386",
+    strip_prefix = "rules_kotlin-{}".format(_RULES_KOTLIN_VERSION),
+    urls = [
+        "https://github.com/bazelbuild/rules_kotlin/archive/{}.tar.gz".format(_RULES_KOTLIN_VERSION),
+    ],
 )
+
+load("@io_bazel_rules_kotlin//kotlin:dependencies.bzl", "kt_download_local_dev_dependencies")
+
+kt_download_local_dev_dependencies()
 
 load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories")
 
-_RULES_KOTLIN_COMPILER_RELEASE = {
-    "urls": [
-        "https://github.com/JetBrains/kotlin/releases/download/v{v}/kotlin-compiler-{v}.zip".format(v = _KOTLIN_COMPILER_VERSION),
-    ],
-    "sha256": "dfef23bb86bd5f36166d4ec1267c8de53b3827c446d54e82322c6b6daad3594c",
-}
-
 kotlin_repositories(
-    compiler_release = _RULES_KOTLIN_COMPILER_RELEASE,
+    compiler_release = {
+        "urls": [
+            "https://github.com/JetBrains/kotlin/releases/download/v{v}/kotlin-compiler-{v}.zip".format(v = _KOTLIN_COMPILER_VERSION),
+        ],
+        "sha256": "2f8de1d73b816354055ff6a4b974b711c11ad55a68b948ed30b38155706b3c4e",
+    },
 )
 
 register_toolchains("//:kotlin_toolchain")
