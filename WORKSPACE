@@ -4,6 +4,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 _KOTLIN_COMPILER_VERSION = "1.5.10"
 
+_COMPOSE_VERSION = "1.0.0"
+
 ## JVM External
 
 _RULES_JVM_EXTERNAL_VERSION = "4.1"
@@ -24,25 +26,35 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
         "org.jetbrains.kotlin:kotlin-stdlib:{}".format(_KOTLIN_COMPILER_VERSION),
-        "androidx.core:core-ktx:1.3.2",
-        "androidx.appcompat:appcompat:1.2.0",
-        "com.google.android.material:material:1.2.1",
-        "androidx.activity:activity-compose:1.3.0-alpha02",
-        "androidx.compose.material:material:1.0.0-beta08",
-        "androidx.compose.ui:ui:1.0.0-beta08",
-        "androidx.compose.ui:ui-tooling:1.0.0-beta08",
-        "androidx.compose.compiler:compiler:1.0.0-beta08",
-        "androidx.compose.runtime:runtime:1.0.0-beta08",
+        "androidx.core:core-ktx:1.6.0",
+        "androidx.appcompat:appcompat:1.3.1",
+        "com.google.android.material:material:1.4.0",
+        "androidx.activity:activity-compose:1.3.0",
+        "androidx.compose.material:material:{}".format(_COMPOSE_VERSION),
+        "androidx.compose.ui:ui:{}".format(_COMPOSE_VERSION),
+        "androidx.compose.ui:ui-tooling:{}".format(_COMPOSE_VERSION),
+        "androidx.compose.compiler:compiler:{}".format(_COMPOSE_VERSION),
+        "androidx.compose.runtime:runtime:{}".format(_COMPOSE_VERSION),
     ],
     override_targets = {
-        "org.jetbrains.kotlin:kotlin-stdlib": "@com_github_jetbrains_kotlin//:kotlin-stdlib",
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk7": "@com_github_jetbrains_kotlin//:kotlin-stdlib-jdk7",
-        "org.jetbrains.kotlin:kotlin-stdlib-jdk8": "@com_github_jetbrains_kotlin//:kotlin-stdlib-jdk8",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": "@//:kotlinx_coroutines_core_jvm",
     },
     repositories = [
         "https://maven.google.com",
         "https://repo1.maven.org/maven2",
     ],
+)
+
+# Secondary maven repository used mainly for workarounds
+maven_install(
+    name = "maven_secondary",
+    artifacts = [
+        # Workaround to add missing 'sun.misc' dependencies to 'kotlinx-coroutines-core-jvm' artifact
+        # Check root BUILD file and 'override_targets' arg of a primary 'maven_install'
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.1",
+    ],
+    fetch_sources = True,
+    repositories = ["https://repo1.maven.org/maven2"],
 )
 
 ## Android

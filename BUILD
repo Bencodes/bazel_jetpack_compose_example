@@ -1,4 +1,11 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "define_kt_toolchain", "kt_compiler_plugin", "kt_javac_options", "kt_kotlinc_options")
+load(
+    "@io_bazel_rules_kotlin//kotlin:kotlin.bzl",
+    "define_kt_toolchain",
+    "kt_compiler_plugin",
+    "kt_javac_options",
+    "kt_jvm_import",
+    "kt_kotlinc_options",
+)
 load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
 
 # Java Toolchain
@@ -38,5 +45,18 @@ kt_compiler_plugin(
     visibility = ["//visibility:public"],
     deps = [
         "@maven//:androidx_compose_compiler_compiler",
+    ],
+)
+
+# Add missing 'sun.misc' files to coroutines artifact
+# Used in 'override_targets' by referencing @//:kotlinx_coroutines_core_jvm
+kt_jvm_import(
+    name = "kotlinx_coroutines_core_jvm",
+    jars = ["@maven_secondary//:v1/https/repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.1/kotlinx-coroutines-core-jvm-1.5.1.jar"],
+    srcjar = "@maven_secondary//:v1/https/repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.1/kotlinx-coroutines-core-jvm-1.5.1-sources.jar",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//stub:sun_misc",
+        "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
     ],
 )
