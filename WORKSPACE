@@ -2,9 +2,9 @@ workspace(name = "bazel_jetpack_compose_example")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-_KOTLIN_COMPILER_VERSION = "1.5.10"
+_KOTLIN_COMPILER_VERSION = "1.5.21"
 
-_COMPOSE_VERSION = "1.0.0"
+_COMPOSE_VERSION = "1.0.2"
 
 ## JVM External
 
@@ -76,37 +76,29 @@ load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
 
 android_sdk_repository(
     name = "androidsdk",
-    api_level = 29,
-    build_tools_version = "29.0.3",
+    api_level = 30,
 )
 
 ## Kotlin
 
 # Enable Kotlin
-_RULES_KOTLIN_VERSION = "c26007a1776a79d94bea7c257ef07a23bbc998d5"
+_RULES_KOTLIN_VERSION = "v1.5.0-beta-4"
 
 http_archive(
     name = "io_bazel_rules_kotlin",
-    sha256 = "be7b1fac4f93fbb81eb79f2f44caa97e1dfa69d2734e4e184443acd9f5182386",
-    strip_prefix = "rules_kotlin-{}".format(_RULES_KOTLIN_VERSION),
+    sha256 = "6cbd4e5768bdfae1598662e40272729ec9ece8b7bded8f0d2c81c8ff96dc139d",
     urls = [
-        "https://github.com/bazelbuild/rules_kotlin/archive/{}.tar.gz".format(_RULES_KOTLIN_VERSION),
+        "https://github.com/bazelbuild/rules_kotlin/releases/download/{}/rules_kotlin_release.tgz".format(_RULES_KOTLIN_VERSION),
     ],
 )
 
-load("@io_bazel_rules_kotlin//kotlin:dependencies.bzl", "kt_download_local_dev_dependencies")
-
-kt_download_local_dev_dependencies()
-
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories")
+load("@io_bazel_rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "kotlinc_version")
 
 kotlin_repositories(
-    compiler_release = {
-        "urls": [
-            "https://github.com/JetBrains/kotlin/releases/download/v{v}/kotlin-compiler-{v}.zip".format(v = _KOTLIN_COMPILER_VERSION),
-        ],
-        "sha256": "2f8de1d73b816354055ff6a4b974b711c11ad55a68b948ed30b38155706b3c4e",
-    },
+    compiler_release = kotlinc_version(
+        release = _KOTLIN_COMPILER_VERSION,
+        sha256 = "f3313afdd6abf1b8c75c6292f4e41f2dbafefc8f6c72762c7ba9b3daeef5da59"
+    )
 )
 
 register_toolchains("//:kotlin_toolchain")
