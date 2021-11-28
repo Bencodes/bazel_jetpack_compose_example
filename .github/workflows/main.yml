@@ -40,4 +40,4 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel-compose-app-cache
       - name: "Building"
-        run: bazel build //compose-app:compose_example_app
+        run: bazel build //compose-app:compose_example_app --config=ci

@@ -1,4 +1,4 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_android_library")
+load("@io_bazel_rules_kotlin//kotlin:android.bzl", "kt_android_library")
 
 kt_android_library(
     name = "lib",
@@ -15,7 +15,6 @@ kt_android_library(
         "@maven//:androidx_compose_ui_ui",
         "@maven//:androidx_compose_ui_ui_tooling",
         "@maven//:androidx_core_core_ktx",
-        "@maven//:com_google_android_material_material",
         "@maven//:org_jetbrains_kotlin_kotlin_stdlib",
     ],
 )
