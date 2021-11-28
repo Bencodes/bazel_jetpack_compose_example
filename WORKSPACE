@@ -97,8 +97,8 @@ load("@io_bazel_rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "
 kotlin_repositories(
     compiler_release = kotlinc_version(
         release = _KOTLIN_COMPILER_VERSION,
-        sha256 = "f3313afdd6abf1b8c75c6292f4e41f2dbafefc8f6c72762c7ba9b3daeef5da59"
-    )
+        sha256 = "f3313afdd6abf1b8c75c6292f4e41f2dbafefc8f6c72762c7ba9b3daeef5da59",
+    ),
 )
 
 register_toolchains("//:kotlin_toolchain")

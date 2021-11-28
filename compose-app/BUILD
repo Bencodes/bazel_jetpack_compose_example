@@ -7,6 +7,7 @@ android_binary(
     incremental_dexing = 1,
     manifest = "AndroidManifest.xml",
     multidex = "native",
+    dex_shards = 5,
     visibility = ["//visibility:public"],
     deps = [
         "//compose-ui:lib",
