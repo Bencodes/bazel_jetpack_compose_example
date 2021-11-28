@@ -9,14 +9,6 @@ load(
     "kt_compiler_plugin",
     "kt_kotlinc_options",
 )
-load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
-
-# Java Toolchain
-
-default_java_toolchain(
-    name = "java_toolchain",
-    visibility = ["//visibility:public"],
-)
 
 # Kotlin Toolchain
 

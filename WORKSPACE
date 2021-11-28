@@ -4,8 +4,6 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 _KOTLIN_COMPILER_VERSION = "1.5.21"
 
-_COMPOSE_VERSION = "1.0.2"
-
 ## JVM External
 
 _RULES_JVM_EXTERNAL_VERSION = "4.1"
@@ -27,14 +25,13 @@ maven_install(
     artifacts = [
         "org.jetbrains.kotlin:kotlin-stdlib:{}".format(_KOTLIN_COMPILER_VERSION),
         "androidx.core:core-ktx:1.6.0",
-        "androidx.appcompat:appcompat:1.3.1",
-        "com.google.android.material:material:1.4.0",
+        "androidx.appcompat:appcompat:1.3.0",
         "androidx.activity:activity-compose:1.3.0",
-        "androidx.compose.material:material:{}".format(_COMPOSE_VERSION),
-        "androidx.compose.ui:ui:{}".format(_COMPOSE_VERSION),
-        "androidx.compose.ui:ui-tooling:{}".format(_COMPOSE_VERSION),
-        "androidx.compose.compiler:compiler:{}".format(_COMPOSE_VERSION),
-        "androidx.compose.runtime:runtime:{}".format(_COMPOSE_VERSION),
+        "androidx.compose.material:material:1.0.2",
+        "androidx.compose.ui:ui:1.0.2",
+        "androidx.compose.ui:ui-tooling:1.0.2",
+        "androidx.compose.compiler:compiler:1.0.2",
+        "androidx.compose.runtime:runtime:1.0.2",
     ],
     override_targets = {
         "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm": "@//:kotlinx_coroutines_core_jvm",

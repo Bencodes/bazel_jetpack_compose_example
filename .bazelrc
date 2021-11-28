@@ -1,6 +1,3 @@
-build --java_toolchain //:java_toolchain
-build --host_java_toolchain //:java_toolchain
-
 # Enable d8 merger
 build --define=android_dexmerger_tool=d8_dexmerger
 
