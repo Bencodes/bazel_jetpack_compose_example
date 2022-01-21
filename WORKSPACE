@@ -69,10 +69,15 @@ http_archive(
     ],
 )
 
-load("@build_bazel_rules_android//android:rules.bzl", "android_sdk_repository")
+load("@build_bazel_rules_android//android:rules.bzl", "android_ndk_repository", "android_sdk_repository")
 
 android_sdk_repository(
     name = "androidsdk",
+    api_level = 30,
+)
+
+android_ndk_repository(
+    name = "androidndk",
     api_level = 30,
 )
 
@@ -99,3 +104,15 @@ kotlin_repositories(
 )
 
 register_toolchains("//:kotlin_toolchain")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "remote_config",
+    # Change the sha256 digest to the value of the `configs_tarball_digest` in the manifest you
+    # got when you ran the curl command above.
+    sha256 = "9f81180099ebc84da906c53cf56c1e9835d7dbc4bbc8ac5c7e075f050c450c3a",
+    urls = [
+        "https://storage.googleapis.com/rbe-toolchain/bazel-configs/bazel_5.0.0/rbe-ubuntu1604/latest/rbe_default.tar",
+    ],
+)
